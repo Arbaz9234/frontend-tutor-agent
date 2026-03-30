@@ -18,7 +18,7 @@
 
 <br/>
 
-> **🏆 Google × Kaggle 5-Day AI Agents Intensive — Capstone Project**
+ **🏆 Google × Kaggle 5-Day AI Agents Intensive — Capstone Project**
 
 <br/>
 
