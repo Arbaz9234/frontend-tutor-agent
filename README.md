@@ -67,7 +67,7 @@ flowchart TD
     Q --> G
  
     subgraph G ["🗂️ 1 · Grounding Layer"]
-        spacer[""]:::invisible
+        spacer[" "]::invisible
         G1[Curated Snippet Corpus]
         G2[SentenceTransformer Embeddings]
         G3[FAISS Vector Index]
