@@ -63,64 +63,50 @@ This mirrors how a **real tutor** actually works: *reference materials → valid
 ```mermaid
 flowchart TD
     Q([🙋 User Question\n&quot;How do I center a div with CSS?&quot;])
- 
+    
     Q --> G
  
     subgraph G ["🗂️  1 · Grounding Layer"]
-        GT(" "):::spacer
         G1[Curated Snippet Corpus]
         G2[SentenceTransformer Embeddings]
         G3[FAISS Vector Index]
-        GB(" "):::spacer
-        GT ~~~ G1 --> G2 --> G3 ~~~ GB
+        G1 --> G2 --> G3
     end
  
     G --> T
  
     subgraph T ["🔧  2 · Tools Layer"]
-        TT(" "):::spacer
         T1["🔍 retrieve_snippets\nFetch relevant HTML/CSS examples"]
         T2["✅ heuristic_validate\nCheck flex / grid / absolute patterns"]
-        TB(" "):::spacer
-        TT ~~~ T1 & T2 ~~~ TB
     end
  
     T --> A
  
     subgraph A ["🤖  3 · Agent Layer"]
-        AT(" "):::spacer
         A1["Gemini 2.5 Flash Lite\n+ Google ADK LlmAgent"]
-        A2["Strict output format\nHTML block + CSS block only"]
-        AB(" "):::spacer
-        AT ~~~ A1 --- A2 ~~~ AB
+        A2[Strict output format\nHTML block + CSS block only]
+        A1 --- A2
     end
  
     A --> O
  
     subgraph O ["🔄  4 · Orchestration Layer"]
-        OT(" "):::spacer
         O1[Run Agent]
         O2[Read Debug Traces]
         O3{Validator\nPassed?}
-        OB(" "):::spacer
-        OT ~~~ O1 --> O2 --> O3
+        O1 --> O2 --> O3
         O3 -- ❌ No --> O1
-        O3 ~~~ OB
     end
  
     O3 -- ✅ Yes --> U
  
     subgraph U ["✨  5 · UX Layer"]
-        UT(" "):::spacer
         U1[Session Memory]
         U2[Inline HTML/CSS Preview]
-        UB(" "):::spacer
-        UT ~~~ U1 & U2 ~~~ UB
     end
  
     U --> R([🎉 Clean Code\n+ Visual Preview Delivered])
  
-    classDef spacer fill:none,stroke:none,color:transparent
     style Q fill:#1e3a5f,color:#a8d8ff,stroke:#4a9eff
     style R fill:#1a3d2b,color:#a8ffcc,stroke:#3ddc84
     style G fill:#1a1a2e,color:#e0e0ff,stroke:#4a4aff
