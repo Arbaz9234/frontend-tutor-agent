@@ -156,30 +156,6 @@ Here's what happens when you ask **"How do I center a child div inside a parent 
 
 ---
 
-## 📁 Project Structure
-
-```
-frontend-tutor-agent/
-│
-├── 📓 frontend-tutor-code-assistant.ipynb   # Main Kaggle notebook
-├── 🖼️  frontend-tutor-banner.jpg            # Project banner
-└── 📄 README.md                             # You are here
-```
-
----
-
-## 🔬 Google × Kaggle AI Agents Intensive — Concepts Applied
-
-This project directly applies concepts from all 5 days of the intensive:
-
-- **Day 1** — Prompting & Structured Output (strict HTML/CSS-only format)
-- **Day 2** — Embeddings & Vector Search (FAISS + SentenceTransformer grounding)
-- **Day 3** — Agents & Tool Use (ADK `FunctionTool`, retrieval + validation tools)
-- **Day 4** — Domain-Specific Agents (education-focused tutor persona)
-- **Day 5** — Agent Orchestration (regenerate-on-fail retry loop, debug traces)
-
----
-
 ## 🔮 Future Enhancements
 
 <details>
@@ -204,7 +180,7 @@ This project directly applies concepts from all 5 days of the intensive:
 
 Open the capstone notebook directly:
 
-[![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](frontend-tutor-code-assistant.ipynb)
+[![Open in Kaggle](https://kaggle.com/static/images/open-in-kaggle.svg)](https://www.kaggle.com/code/arbaztahir/frontend-tutor-code-assistant)
 
 ---
 
