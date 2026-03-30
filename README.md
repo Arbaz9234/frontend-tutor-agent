@@ -34,9 +34,7 @@ Beginners face:
 
 - 🔁 **Inconsistent** explanations scattered across tutorials
 - 🗓️ **Outdated** layout patterns that no longer reflect best practices
-- 📚 **Overly verbose** examples that obscure the core concept
-- ❌ **No validation** — broken code can still *appear* to work
-- 🤔 **Translation gaps** — turning plain English questions into working code
+- 🤔 **Translation gaps** turning plain English questions into working code
 
 The result? Frustration. Slow learning curves. Discouragement.
 
@@ -61,48 +59,61 @@ This mirrors how a **real tutor** actually works: *reference materials → valid
 ---
 
 ## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        USER QUESTION                            │
-│            "How do I center a div with CSS?"                    │
-└─────────────────────┬───────────────────────────────────────────┘
-                      │
-                      ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                  1. GROUNDING LAYER                             │
-│     Snippet Corpus → SentenceTransformer → FAISS Index          │
-│      (Canonical HTML/CSS examples, indexed for similarity)      │
-└─────────────────────┬───────────────────────────────────────────┘
-                      │
-                      ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    2. TOOLS LAYER                               │
-│   ✔ retrieve_snippets    ✔ heuristic_validate                   │
-│   (Fetch relevant        (Check for flex/grid/absolute          │
-│    grounded examples)     centering patterns)                   │
-└─────────────────────┬───────────────────────────────────────────┘
-                      │
-                      ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    3. AGENT LAYER                               │
-│         Gemini 2.5 Flash Lite + Google ADK LlmAgent             │
-│    (Structured instructions, tool-calling, strict output fmt)   │
-└─────────────────────┬───────────────────────────────────────────┘
-                      │
-                      ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                4. ORCHESTRATION LAYER                           │
-│             Regenerate-on-Fail Retry Loop                       │
-│    Run → Read Debug Traces → Detect Validator → Retry if Fail   │
-└─────────────────────┬───────────────────────────────────────────┘
-                      │
-                      ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    5. UX LAYER                                  │
-│         Session Memory + Inline HTML/CSS Preview                │
-│           (See your layout rendered instantly)                  │
-└─────────────────────────────────────────────────────────────────┘
+ 
+```mermaid
+flowchart TD
+    Q([🙋 User Question\n&quot;How do I center a div with CSS?&quot;])
+    
+    Q --> G
+ 
+    subgraph G ["🗂️  1 · Grounding Layer"]
+        G1[Curated Snippet Corpus]
+        G2[SentenceTransformer Embeddings]
+        G3[FAISS Vector Index]
+        G1 --> G2 --> G3
+    end
+ 
+    G --> T
+ 
+    subgraph T ["🔧  2 · Tools Layer"]
+        T1["🔍 retrieve_snippets\nFetch relevant HTML/CSS examples"]
+        T2["✅ heuristic_validate\nCheck flex / grid / absolute patterns"]
+    end
+ 
+    T --> A
+ 
+    subgraph A ["🤖  3 · Agent Layer"]
+        A1["Gemini 2.5 Flash Lite\n+ Google ADK LlmAgent"]
+        A2[Strict output format\nHTML block + CSS block only]
+        A1 --- A2
+    end
+ 
+    A --> O
+ 
+    subgraph O ["🔄  4 · Orchestration Layer"]
+        O1[Run Agent]
+        O2[Read Debug Traces]
+        O3{Validator\nPassed?}
+        O1 --> O2 --> O3
+        O3 -- ❌ No --> O1
+    end
+ 
+    O3 -- ✅ Yes --> U
+ 
+    subgraph U ["✨  5 · UX Layer"]
+        U1[Session Memory]
+        U2[Inline HTML/CSS Preview]
+    end
+ 
+    U --> R([🎉 Clean Code\n+ Visual Preview Delivered])
+ 
+    style Q fill:#1e3a5f,color:#a8d8ff,stroke:#4a9eff
+    style R fill:#1a3d2b,color:#a8ffcc,stroke:#3ddc84
+    style G fill:#1a1a2e,color:#e0e0ff,stroke:#4a4aff
+    style T fill:#1a1a2e,color:#e0e0ff,stroke:#4a4aff
+    style A fill:#1a1a2e,color:#e0e0ff,stroke:#4a4aff
+    style O fill:#1a1a2e,color:#e0e0ff,stroke:#4a4aff
+    style U fill:#1a1a2e,color:#e0e0ff,stroke:#4a4aff
 ```
 
 ---
