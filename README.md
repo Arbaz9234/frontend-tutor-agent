@@ -66,11 +66,13 @@ flowchart TD
     
     Q --> G
  
-    subgraph G ["🗂️ 1 · Grounding Layer"]
+    subgraph G ["🗂️  1 · Grounding Layer"]
+        GT(" "):::spacer
         G1[Curated Snippet Corpus]
         G2[SentenceTransformer Embeddings]
         G3[FAISS Vector Index]
-        G1 --> G2 --> G3
+        GB(" "):::spacer
+        GT ~~~ G1 --> G2 --> G3 ~~~ GB
     end
 
     G --> T
