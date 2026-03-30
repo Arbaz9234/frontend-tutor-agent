@@ -66,7 +66,7 @@ flowchart TD
     
     Q --> G
  
-    subgraph G ["<br/>🗂️  1 · Grounding Layer<br/>"]
+    subgraph G ["&nbsp;&nbsp;🗂️  1 · Grounding Layer&nbsp;&nbsp;"]
         G1[Curated Snippet Corpus]
         G2[SentenceTransformer Embeddings]
         G3[FAISS Vector Index]
