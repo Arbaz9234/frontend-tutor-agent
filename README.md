@@ -66,14 +66,15 @@ flowchart TD
     
     Q --> G
  
-    subgraph G ["🗂️  
-1 · Grounding Layer"]
+    subgraph G ["🗂️ 1 · Grounding Layer"]
+        spacer[" "]:::invisible
         G1[Curated Snippet Corpus]
         G2[SentenceTransformer Embeddings]
         G3[FAISS Vector Index]
         G1 --> G2 --> G3
     end
- 
+    classDef invisible fill:none,stroke:none,color:transparent;
+
     G --> T
  
     subgraph T ["🔧  2 · Tools Layer"]
